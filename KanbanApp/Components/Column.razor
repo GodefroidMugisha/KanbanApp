@@ -1,0 +1,37 @@
+﻿@using System.Net.Http.Json;
+
+@using KanbanApp.Models
+@inject TaskService TaskService
+
+<div class="card p-2" @ondragover:preventDefault @ondrop="OnDrop">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>@ColumnTypeValue.ToString()</strong>
+        <span class="badge bg-secondary">@Tasks?.Count() ?? 0</span>
+    </div>
+    <div class="card-body min-vh-50">
+        @if (Tasks?.Any() != true)
+        {
+            <div class="text-muted">No tasks</div>
+        }
+        else
+        {
+            @foreach (var t in Tasks)
+            {
+                <TaskCard Task="t" OnEdit="OnEdit" OnDelete="OnDelete" />
+            }
+        }
+    </div>
+</div>
+
+@code {
+    // renamed property to avoid name collision with the component type "Column"
+    [Parameter] public ColumnType ColumnTypeValue { get; set; }
+    [Parameter] public IEnumerable<KanbanTask>? Tasks { get; set; }
+    [Parameter] public EventCallback<KanbanTask> OnEdit { get; set; }
+    [Parameter] public EventCallback<Guid> OnDelete { get; set; }
+
+    private async Task OnDrop()
+    {
+        await TaskService.DropToColumn(ColumnTypeValue);
+    }
+}
