@@ -32,9 +32,8 @@ A **Blazor WebAssembly Kanban Board Application** for task management. This appl
 
 ## Demo
 
-![KanbanApp Screenshot](screenshot.png)
+<img width="1365" height="594" alt="Screenshot 2025-09-30 155814" src="https://github.com/user-attachments/assets/e03e2f2f-ef32-4fd1-b545-8ec544a9c450" />
 
-> Screenshot placeholder – replace with your actual screenshot showing the Kanban board interface.
 
 ---
 
